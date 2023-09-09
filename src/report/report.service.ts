@@ -9,10 +9,13 @@ const findReport = (type: string, id: string): reportInterface =>
     .filter((report) => report.type == type)
     .find((report) => report.id === id);
 
+const listReport = (type: string): reportInterface[] =>
+  data.reports.filter((report) => report.type == type);
+
 @Injectable()
 export class ReportService {
   getReport(type: string): reportInterface[] {
-    return data.reports.filter((report) => report.type == type);
+    return listReport(type);
   }
 
   getReportId(type: string, id: string): reportInterface | string {
@@ -38,10 +41,8 @@ export class ReportService {
   ): reportInterface | string {
     if (!findReport(type, id)) return `No report matching the id: ${id}`;
     const updatedReport = { ...findReport(type, id), ...req };
-    const getReportIndex = data.reports
-      .filter((report) => report.type == type)
-      .findIndex((report) => report.id === id);
-    data.reports[getReportIndex] = updatedReport;
+    const getReportIndex = data.reports.findIndex((report) => report.id === id);
+    data.reports.splice(getReportIndex, 1, updatedReport);
     return updatedReport;
   }
 
@@ -50,8 +51,7 @@ export class ReportService {
     const removeReport = data.reports.filter(
       (report) => report.id != findReport(type, id).id,
     );
-    console.log(removeReport);
-    // data.reports = removeReport;
+    data.reports = removeReport;
     return `Deleted report ${+id}`;
   }
 }
