@@ -1,13 +1,13 @@
 export enum reportType {
-  INCOME = 'INCOME',
-  EXPENSE = 'EXPENSE',
+  INCOME = 'income',
+  EXPENSE = 'expense',
 }
 
 export interface reportInterface {
-  id: string;
+  id?: string;
   source: string;
   amount: number;
   type: reportType;
-  created_at: Date;
-  updated_at: Date;
+  created_at?: Date;
+  updated_at?: Date;
 }
