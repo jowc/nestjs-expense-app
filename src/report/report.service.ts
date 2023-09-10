@@ -3,6 +3,7 @@ import { v4 as uuid } from 'uuid';
 
 import { data } from './data-access/mock.data';
 import { reportInterface } from './data-access/mock.types';
+import { UpdateReportDto } from './report.dto';
 
 const findReport = (type: string, id: string): reportInterface =>
   data.reports
@@ -37,7 +38,7 @@ export class ReportService {
   updateReport(
     type: string,
     id: string,
-    req: reportInterface,
+    req: UpdateReportDto,
   ): reportInterface | string {
     if (!findReport(type, id)) return `No report matching the id: ${id}`;
     const updatedReport = { ...findReport(type, id), ...req };
