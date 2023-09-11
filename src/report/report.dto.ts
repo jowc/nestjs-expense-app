@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import {
   IsInt,
   IsNotEmpty,
@@ -5,6 +6,7 @@ import {
   IsPositive,
   IsString,
 } from 'class-validator';
+import { reportType } from './data-access/mock.types';
 
 export class CreateReportDto {
   @IsString()
@@ -26,4 +28,19 @@ export class UpdateReportDto {
   @IsPositive()
   @IsOptional()
   amount: number;
+}
+
+export class ReportResponseDto {
+  id: string;
+  source: string;
+  amount: number;
+  type: reportType;
+
+  @Exclude()
+  created_at?: Date;
+  updated_at?: Date;
+
+  constructor(partial: Partial<ReportResponseDto>) {
+    Object.assign(this, partial);
+  }
 }
