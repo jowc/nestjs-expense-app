@@ -6,7 +6,7 @@ import {
   IsPositive,
   IsString,
 } from 'class-validator';
-import { reportType } from './data-access/mock.types';
+import { reportType } from '../store/mock.types';
 
 export class CreateReportDto {
   @IsString()

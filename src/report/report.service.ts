@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { v4 as uuid } from 'uuid';
 
-import { data } from './data-access/mock.data';
-import { reportInterface } from './data-access/mock.types';
+import { data } from '../store/mock.data';
+import { reportInterface, reportType } from '../store/mock.types';
 import { ReportResponseDto, UpdateReportDto } from './report.dto';
 
 const findReport = (type: string, id: string): ReportResponseDto => {
@@ -19,7 +19,7 @@ const listReport = (type: string): ReportResponseDto[] =>
 
 @Injectable()
 export class ReportService {
-  getReport(type: string): ReportResponseDto[] {
+  getReport(type: reportType): ReportResponseDto[] {
     return listReport(type);
   }
 

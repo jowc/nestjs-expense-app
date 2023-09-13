@@ -10,7 +10,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { ReportService } from './report.service';
-import { reportInterface, reportType } from './data-access/mock.types';
+import { reportInterface, reportType } from '../store/mock.types';
 import {
   CreateReportDto,
   ReportResponseDto,
@@ -22,7 +22,7 @@ const reqType = (type: string): reportType =>
 
 @Controller('v1/report/:type')
 export class ReportController {
-  constructor(private reportService: ReportService) {}
+  constructor(private readonly reportService: ReportService) {}
 
   @Get()
   getReport(
