@@ -1,4 +1,4 @@
-import { Exclude } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 import {
   IsInt,
   IsNotEmpty,
@@ -6,7 +6,7 @@ import {
   IsPositive,
   IsString,
 } from 'class-validator';
-import { reportType } from './data-access/mock.types';
+import { reportType } from '../store/mock.types';
 
 export class CreateReportDto {
   @IsString()
@@ -38,6 +38,12 @@ export class ReportResponseDto {
 
   @Exclude()
   created_at?: Date;
+  @Expose({ name: 'createdAt' })
+  transformCreated() {
+    return this.created_at;
+  }
+
+  @Exclude()
   updated_at?: Date;
 
   constructor(partial: Partial<ReportResponseDto>) {
