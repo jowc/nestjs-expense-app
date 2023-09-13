@@ -1,4 +1,4 @@
-import { Exclude } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 import {
   IsInt,
   IsNotEmpty,
@@ -38,6 +38,12 @@ export class ReportResponseDto {
 
   @Exclude()
   created_at?: Date;
+  @Expose({ name: 'createdAt' })
+  transformCreated() {
+    return this.created_at;
+  }
+
+  @Exclude()
   updated_at?: Date;
 
   constructor(partial: Partial<ReportResponseDto>) {
